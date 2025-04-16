@@ -1,0 +1,21 @@
+{
+  "extensionName": { "message": "ChatGPT मॉडल स्टाइलर" },
+  "extensionDescription": {
+    "message": "ChatGPT मॉडल के इमोजी, रंग और बॉर्डर को अनुकूलित करें।"
+  },
+  "tabEditorLabel": { "message": "संपादक" },
+  "tabJSONLabel": { "message": "JSON" },
+  "addModelHeading": { "message": "मॉडल जोड़ें" },
+  "modelNamePlaceholder": { "message": "नाम (जैसे: gpt-5)" },
+  "emojiLabel": { "message": "इमोजी" },
+  "colorLabel": { "message": "रंग" },
+  "emojiCheckboxLabel": { "message": "इमोजी दिखाएँ" },
+  "borderCheckboxLabel": { "message": "बॉर्डर दिखाएँ" },
+  "addButton": { "message": "➕ जोड़ें" },
+  "saveButton": { "message": "💾 सहेजें" },
+  "copyJSON": { "message": "📋 JSON कॉपी करें" },
+  "importJSON": { "message": "📥 JSON आयात करें" },
+  "configImported": { "message": "कॉन्फ़िगरेशन आयातित।" },
+  "invalidJSON": { "message": "अमान्य JSON" },
+  "removeTooltip": { "message": "हटाएं" }
+}

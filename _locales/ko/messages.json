@@ -1,0 +1,21 @@
+{
+  "extensionName": { "message": "ChatGPT 모델 스타일러" },
+  "extensionDescription": {
+    "message": "ChatGPT 모델의 이모지, 색상 및 테두리를 사용자 정의합니다."
+  },
+  "tabEditorLabel": { "message": "편집기" },
+  "tabJSONLabel": { "message": "JSON" },
+  "addModelHeading": { "message": "모델 추가" },
+  "modelNamePlaceholder": { "message": "이름 (예: gpt-5)" },
+  "emojiLabel": { "message": "이모지" },
+  "colorLabel": { "message": "색상" },
+  "emojiCheckboxLabel": { "message": "이모지 표시" },
+  "borderCheckboxLabel": { "message": "테두리 표시" },
+  "addButton": { "message": "➕ 추가" },
+  "saveButton": { "message": "💾 저장" },
+  "copyJSON": { "message": "📋 JSON 복사" },
+  "importJSON": { "message": "📥 JSON 가져오기" },
+  "configImported": { "message": "구성이 가져와졌습니다." },
+  "invalidJSON": { "message": "잘못된 JSON" },
+  "removeTooltip": { "message": "제거" }
+}

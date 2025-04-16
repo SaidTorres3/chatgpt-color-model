@@ -1,0 +1,21 @@
+{
+  "extensionName": { "message": "Estilizador de Modelos ChatGPT" },
+  "extensionDescription": {
+    "message": "Personalize emojis, cores e bordas dos modelos ChatGPT."
+  },
+  "tabEditorLabel": { "message": "Editor" },
+  "tabJSONLabel": { "message": "JSON" },
+  "addModelHeading": { "message": "Adicionar modelo" },
+  "modelNamePlaceholder": { "message": "Nome (ex. gpt-5)" },
+  "emojiLabel": { "message": "Emoji" },
+  "colorLabel": { "message": "Cor" },
+  "emojiCheckboxLabel": { "message": "Mostrar emoji" },
+  "borderCheckboxLabel": { "message": "Mostrar borda" },
+  "addButton": { "message": "➕ Adicionar" },
+  "saveButton": { "message": "💾 Salvar" },
+  "copyJSON": { "message": "📋 Copiar JSON" },
+  "importJSON": { "message": "📥 Importar JSON" },
+  "configImported": { "message": "Configuração importada." },
+  "invalidJSON": { "message": "JSON inválido" },
+  "removeTooltip": { "message": "Remover" }
+}

@@ -1,0 +1,21 @@
+{
+  "extensionName": { "message": "Стилизация моделей ChatGPT" },
+  "extensionDescription": {
+    "message": "Настройте эмодзи, цвета и рамки для моделей ChatGPT."
+  },
+  "tabEditorLabel": { "message": "Редактор" },
+  "tabJSONLabel": { "message": "JSON" },
+  "addModelHeading": { "message": "Добавить модель" },
+  "modelNamePlaceholder": { "message": "Имя (напр. gpt-5)" },
+  "emojiLabel": { "message": "Эмодзи" },
+  "colorLabel": { "message": "Цвет" },
+  "emojiCheckboxLabel": { "message": "Показать эмодзи" },
+  "borderCheckboxLabel": { "message": "Показать рамку" },
+  "addButton": { "message": "➕ Добавить" },
+  "saveButton": { "message": "💾 Сохранить" },
+  "copyJSON": { "message": "📋 Копировать JSON" },
+  "importJSON": { "message": "📥 Импортировать JSON" },
+  "configImported": { "message": "Конфигурация импортирована." },
+  "invalidJSON": { "message": "Неверный JSON" },
+  "removeTooltip": { "message": "Удалить" }
+}

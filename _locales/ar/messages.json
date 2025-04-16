@@ -1,0 +1,21 @@
+{
+  "extensionName": { "message": "مُخصص نماذج ChatGPT" },
+  "extensionDescription": {
+    "message": "خصص الرموز التعبيرية والألوان والحدود لنماذج ChatGPT."
+  },
+  "tabEditorLabel": { "message": "المحرر" },
+  "tabJSONLabel": { "message": "JSON" },
+  "addModelHeading": { "message": "إضافة نموذج" },
+  "modelNamePlaceholder": { "message": "الاسم (مثال: gpt-5)" },
+  "emojiLabel": { "message": "رمز تعبيري" },
+  "colorLabel": { "message": "اللون" },
+  "emojiCheckboxLabel": { "message": "عرض رمز تعبيري" },
+  "borderCheckboxLabel": { "message": "عرض حدود" },
+  "addButton": { "message": "➕ إضافة" },
+  "saveButton": { "message": "💾 حفظ" },
+  "copyJSON": { "message": "📋 نسخ JSON" },
+  "importJSON": { "message": "📥 استيراد JSON" },
+  "configImported": { "message": "تم استيراد الإعدادات." },
+  "invalidJSON": { "message": "JSON غير صالح" },
+  "removeTooltip": { "message": "حذف" }
+}

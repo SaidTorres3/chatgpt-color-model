@@ -1,0 +1,21 @@
+{
+  "extensionName": { "message": "ChatGPTモデルスタイラー" },
+  "extensionDescription": {
+    "message": "ChatGPTモデルの絵文字、色、ボーダーをカスタマイズします。"
+  },
+  "tabEditorLabel": { "message": "エディター" },
+  "tabJSONLabel": { "message": "JSON" },
+  "addModelHeading": { "message": "モデルを追加" },
+  "modelNamePlaceholder": { "message": "名前 (例: gpt-5)" },
+  "emojiLabel": { "message": "絵文字" },
+  "colorLabel": { "message": "色" },
+  "emojiCheckboxLabel": { "message": "絵文字を表示" },
+  "borderCheckboxLabel": { "message": "枠線を表示" },
+  "addButton": { "message": "➕ 追加" },
+  "saveButton": { "message": "💾 保存" },
+  "copyJSON": { "message": "📋 JSONをコピー" },
+  "importJSON": { "message": "📥 JSONをインポート" },
+  "configImported": { "message": "設定がインポートされました。" },
+  "invalidJSON": { "message": "無効なJSON" },
+  "removeTooltip": { "message": "削除" }
+}

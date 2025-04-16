@@ -1,0 +1,21 @@
+{
+  "extensionName": { "message": "ChatGPT 模型样式器" },
+  "extensionDescription": {
+    "message": "自定义 ChatGPT 模型的表情符号、颜色和边框。"
+  },
+  "tabEditorLabel": { "message": "编辑器" },
+  "tabJSONLabel": { "message": "JSON" },
+  "addModelHeading": { "message": "添加模型" },
+  "modelNamePlaceholder": { "message": "名称（如：gpt-5）" },
+  "emojiLabel": { "message": "表情" },
+  "colorLabel": { "message": "颜色" },
+  "emojiCheckboxLabel": { "message": "显示表情" },
+  "borderCheckboxLabel": { "message": "显示边框" },
+  "addButton": { "message": "➕ 添加" },
+  "saveButton": { "message": "💾 保存" },
+  "copyJSON": { "message": "📋 复制 JSON" },
+  "importJSON": { "message": "📥 导入 JSON" },
+  "configImported": { "message": "配置已导入。" },
+  "invalidJSON": { "message": "无效的 JSON" },
+  "removeTooltip": { "message": "删除" }
+}
