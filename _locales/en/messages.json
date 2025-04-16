@@ -1,0 +1,53 @@
+{
+  "extensionName": {
+    "message": "ChatGPT Model Styler"
+  },
+  "extensionDescription": {
+    "message": "Customize emojis, colors and borders for ChatGPT models."
+  },
+  "tabEditorLabel": {
+    "message": "Editor"
+  },
+  "tabJSONLabel": {
+    "message": "JSON"
+  },
+  "addModelHeading": {
+    "message": "Add model"
+  },
+  "modelNamePlaceholder": {
+    "message": "Name (e.g. gpt-5)"
+  },
+  "emojiLabel": {
+    "message": "Emoji"
+  },
+  "colorLabel": {
+    "message": "Color"
+  },
+  "emojiCheckboxLabel": {
+    "message": "Emoji"
+  },
+  "borderCheckboxLabel": {
+    "message": "Border"
+  },
+  "addButton": {
+    "message": "➕ Add"
+  },
+  "saveButton": {
+    "message": "💾 Save changes"
+  },
+  "copyJSON": {
+    "message": "📋 Copy JSON"
+  },
+  "importJSON": {
+    "message": "📥 Import JSON"
+  },
+  "configImported": {
+    "message": "Configuration imported."
+  },
+  "invalidJSON": {
+    "message": "Invalid JSON"
+  },
+  "removeTooltip": {
+    "message": "Remove"
+  }
+}

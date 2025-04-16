@@ -1,3 +1,4 @@
+// your default styles (same as before)
 const defaultModelStyles = {
   "4":            { color: "#343a40", icon: "👴", showEmoji: true, showBorder: true },
   "4o":           { color: "#007bff", icon: "😊", showEmoji: true, showBorder: true },
@@ -13,37 +14,44 @@ const defaultModelStyles = {
 let modelStyles = {};
 
 document.addEventListener('DOMContentLoaded', () => {
-  const btnEditor = document.querySelector('button[data-tab="editor"]');
-  const btnJSON   = document.querySelector('button[data-tab="json"]');
-  const tabEditor = document.getElementById('editor');
-  const tabJSON   = document.getElementById('json');
+  // grab all the elements
+  const tabEditor   = document.getElementById('tabEditor');
+  const tabJSON     = document.getElementById('tabJSON');
+  const container   = document.getElementById('container');
+  const addForm     = document.getElementById('addForm');
+  const saveButton  = document.getElementById('saveButton');
+  const copyJSON    = document.getElementById('copyJSON');
+  const importJSON  = document.getElementById('importJSON');
+  const jsonArea    = document.getElementById('jsonArea');
+  const modelNameIn = document.getElementById('modelNameInput');
+  const modelColorIn= document.getElementById('modelColorInput');
+  const modelIconIn = document.getElementById('modelIconInput');
+  const addButton   = document.getElementById('addButton');
+  const addModelHd  = document.getElementById('addModelHeading');
 
-  const container = document.getElementById('container');
-  const saveBtn   = document.getElementById('save');
-  const addForm   = document.getElementById('addForm');
-  const jsonArea  = document.getElementById('jsonArea');
-  const copyBtn   = document.getElementById('copyJSON');
-  const importBtn = document.getElementById('importJSON');
+  // fill all static labels from i18n
+  tabEditor.textContent      = chrome.i18n.getMessage('tabEditorLabel');
+  tabJSON.textContent        = chrome.i18n.getMessage('tabJSONLabel');
+  addModelHd.textContent     = chrome.i18n.getMessage('addModelHeading');
+  modelNameIn.placeholder    = chrome.i18n.getMessage('modelNamePlaceholder');
+  modelIconIn.placeholder    = chrome.i18n.getMessage('emojiLabel');
+  addButton.textContent      = chrome.i18n.getMessage('addButton');
+  saveButton.textContent     = chrome.i18n.getMessage('saveButton');
+  copyJSON.textContent       = chrome.i18n.getMessage('copyJSON');
+  importJSON.textContent     = chrome.i18n.getMessage('importJSON');
 
-  // Tab switching
+  // tab switching
   function switchTab(to) {
-    if (to === 'editor') {
-      btnEditor.classList.add('active');
-      btnJSON.classList.remove('active');
-      tabEditor.classList.add('active');
-      tabJSON.classList.remove('active');
-    } else {
-      btnEditor.classList.remove('active');
-      btnJSON.classList.add('active');
-      tabEditor.classList.remove('active');
-      tabJSON.classList.add('active');
+    document.querySelectorAll('.tabs button').forEach(b => b.classList.toggle('active', b.dataset.tab === to));
+    document.querySelectorAll('.tab-content').forEach(div => div.classList.toggle('active', div.id === to));
+    if (to === 'json') {
       jsonArea.value = JSON.stringify(modelStyles, null, 2);
     }
   }
-  btnEditor.onclick = ()=> switchTab('editor');
-  btnJSON.onclick   = ()=> switchTab('json');
+  tabEditor.addEventListener('click', ()=> switchTab('editor'));
+  tabJSON.addEventListener('click',   ()=> switchTab('json'));
 
-  // Render the editor UI
+  // render the model‑editor rows
   function renderEditor() {
     container.innerHTML = '';
     for (const key of Object.keys(modelStyles)) {
@@ -53,84 +61,92 @@ document.addEventListener('DOMContentLoaded', () => {
       row.innerHTML = `
         <div>
           <strong>${key}</strong>
-          <button class="remove" data-model="${key}" title="Eliminar">✖</button>
+          <button class="remove" data-model="${key}" title="${chrome.i18n.getMessage('removeTooltip')}">✖</button>
         </div>
-        <label>Color: <input type="color" class="color" data-model="${key}" value="${cfg.color}"></label>
-        <label>Emoji: <input type="text" class="icon" data-model="${key}" value="${cfg.icon}" maxlength="2" style="width:2em;"></label>
-        <label><input type="checkbox" class="showEmoji" data-model="${key}" ${cfg.showEmoji?'checked':''}/> Emoji</label>
-        <label><input type="checkbox" class="showBorder" data-model="${key}" ${cfg.showBorder?'checked':''}/> Borde</label>
+        <label>${chrome.i18n.getMessage('colorLabel')}: 
+          <input type="color" class="color" data-model="${key}" value="${cfg.color}">
+        </label>
+        <label>${chrome.i18n.getMessage('emojiLabel')}: 
+          <input type="text" class="icon" data-model="${key}" value="${cfg.icon}" maxlength="2" style="width:2em;">
+        </label>
+        <label>
+          <input type="checkbox" class="showEmoji" data-model="${key}" ${cfg.showEmoji?'checked':''}/>
+          ${chrome.i18n.getMessage('emojiCheckboxLabel')}
+        </label>
+        <label>
+          <input type="checkbox" class="showBorder" data-model="${key}" ${cfg.showBorder?'checked':''}/>
+          ${chrome.i18n.getMessage('borderCheckboxLabel')}
+        </label>
       `;
       container.appendChild(row);
     }
   }
 
-  // 2) Load from storage, with DEFAULT fallback, and initialize if empty
-  chrome.storage.sync.get(['modelStyles'], ({ modelStyles: ms }) => {
+  // load (or init) storage
+  chrome.storage.sync.get('modelStyles', ({ modelStyles: ms }) => {
     if (!ms) {
       modelStyles = defaultModelStyles;
-      chrome.storage.sync.set({ modelStyles }, () => {
-        renderEditor();
-      });
+      chrome.storage.sync.set({ modelStyles }, renderEditor);
     } else {
       modelStyles = ms;
       renderEditor();
     }
   });
 
-  // Save button
-  saveBtn.addEventListener('click', () => {
-    document.querySelectorAll('.model-row').forEach(row => {
+  // save changes
+  saveButton.addEventListener('click', () => {
+    container.querySelectorAll('.model-row').forEach(row => {
       const key = row.querySelector('.color').dataset.model;
-      modelStyles[key].color       = row.querySelector('.color').value;
-      modelStyles[key].icon        = row.querySelector('.icon').value;
-      modelStyles[key].showEmoji   = row.querySelector('.showEmoji').checked;
-      modelStyles[key].showBorder  = row.querySelector('.showBorder').checked;
+      modelStyles[key].color      = row.querySelector('.color').value;
+      modelStyles[key].icon       = row.querySelector('.icon').value;
+      modelStyles[key].showEmoji  = row.querySelector('.showEmoji').checked;
+      modelStyles[key].showBorder = row.querySelector('.showBorder').checked;
     });
     chrome.storage.sync.set({ modelStyles }, () => window.close());
   });
 
-  // Remove a model
+  // remove a model
   container.addEventListener('click', e => {
-    if (e.target.classList.contains('remove')) {
+    if (e.target.matches('.remove')) {
       delete modelStyles[e.target.dataset.model];
       renderEditor();
     }
   });
 
-  // Add new model
+  // add a model
   addForm.addEventListener('submit', e => {
     e.preventDefault();
-    const name  = addForm.elements['modelName'].value.trim();
-    const color = addForm.elements['modelColor'].value;
-    const icon  = addForm.elements['modelIcon'].value;
+    const name  = modelNameIn.value.trim();
+    const color = modelColorIn.value;
+    const icon  = modelIconIn.value;
     if (!name || modelStyles[name]) return;
     modelStyles[name] = { color, icon, showEmoji: true, showBorder: true };
     renderEditor();
     addForm.reset();
   });
 
-  // Copy JSON to clipboard
-  copyBtn.addEventListener('click', () => {
+  // copy JSON
+  copyJSON.addEventListener('click', () => {
     jsonArea.select();
     document.execCommand('copy');
   });
 
-  // Import JSON
-  importBtn.addEventListener('click', () => {
+  // import JSON
+  importJSON.addEventListener('click', () => {
     try {
       const obj = JSON.parse(jsonArea.value);
       if (typeof obj !== 'object' || obj === null) throw '';
       modelStyles = obj;
       chrome.storage.sync.set({ modelStyles }, () => {
         renderEditor();
-        alert('✅ Configuración importada.');
+        alert(chrome.i18n.getMessage('configImported'));
         switchTab('editor');
       });
     } catch {
-      alert('❌ JSON inválido');
+      alert(chrome.i18n.getMessage('invalidJSON'));
     }
   });
 
-  // Start on the editor tab
+  // start
   switchTab('editor');
 });

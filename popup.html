@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <style>
@@ -14,36 +14,36 @@
     .model-row label { margin-right: 8px; font-size: 0.9em; }
     #addForm { margin: 8px 0; padding: 6px; border: 1px dashed #aaa; }
     #addForm input { margin-right: 4px; }
-    #save { margin-top: 8px; width: 100%; padding: 6px; }
+    #saveButton { margin-top: 8px; width: 100%; padding: 6px; }
     #jsonArea { width: 100%; height: 200px; font-family: monospace; }
     #jsonButtons button { margin-right: 6px; }
   </style>
 </head>
 <body>
   <div class="tabs">
-    <button data-tab="editor" class="active">Editor</button>
-    <button data-tab="json">JSON</button>
+    <button id="tabEditor" data-tab="editor"></button>
+    <button id="tabJSON"   data-tab="json"></button>
   </div>
 
   <div id="editor" class="tab-content active">
     <div id="container"></div>
 
     <form id="addForm">
-      <strong>Añadir modelo</strong><br>
-      <input name="modelName" placeholder="Clave (ej. gpt-5)" required>
-      <input type="color" name="modelColor" value="#000000">
-      <input name="modelIcon" placeholder="Emoji" maxlength="2" style="width:2em;">
-      <button type="submit">➕ Agregar</button>
+      <strong id="addModelHeading"></strong><br>
+      <input id="modelNameInput"      placeholder="" required>
+      <input type="color" id="modelColorInput" value="#000000">
+      <input id="modelIconInput"      placeholder="" maxlength="2" style="width:2em;">
+      <button type="submit" id="addButton"></button>
     </form>
 
-    <button id="save">💾 Guardar cambios</button>
+    <button id="saveButton"></button>
   </div>
 
   <div id="json" class="tab-content">
     <textarea id="jsonArea"></textarea>
     <div id="jsonButtons">
-      <button id="copyJSON">📋 Copiar</button>
-      <button id="importJSON">📥 Importar</button>
+      <button id="copyJSON"></button>
+      <button id="importJSON"></button>
     </div>
   </div>
 
