@@ -1,0 +1,92 @@
+{
+  "4": {
+    "color": "#343a40",
+    "icon": "👴",
+    "showEmoji": true,
+    "showBorder": true
+  },
+  "4o": {
+    "color": "#007bff",
+    "icon": "😊",
+    "showEmoji": true,
+    "showBorder": true
+  },
+  "4o mini": {
+    "color": "#fd7e14",
+    "icon": "⚡",
+    "showEmoji": true,
+    "showBorder": true
+  },
+  "4.5": {
+    "color": "#dc3545",
+    "icon": "🧪",
+    "showEmoji": true,
+    "showBorder": true
+  },
+  "o3": {
+    "color": "#20c997",
+    "icon": "💎",
+    "showEmoji": true,
+    "showBorder": true
+  },
+  "o4-mini": {
+    "color": "#28a745",
+    "icon": "🌀",
+    "showEmoji": true,
+    "showBorder": true
+  },
+  "o4-mini-high": {
+    "color": "#6f42c1",
+    "icon": "🧠",
+    "showEmoji": true,
+    "showBorder": true
+  },
+  "Tareas": {
+    "color": "#17a2b8",
+    "icon": "📋",
+    "showEmoji": true,
+    "showBorder": true
+  },
+  "Tasks": {
+    "color": "#17a2b8",
+    "icon": "📋",
+    "showEmoji": true,
+    "showBorder": true
+  },
+  "タスク": {
+    "color": "#17a2b8",
+    "icon": "📋",
+    "showEmoji": true,
+    "showBorder": true
+  },
+  "Aufgaben": {
+    "color": "#17a2b8",
+    "icon": "📋",
+    "showEmoji": true,
+    "showBorder": true
+  },
+  "任务": {
+    "color": "#17a2b8",
+    "icon": "📋",
+    "showEmoji": true,
+    "showBorder": true
+  },
+  "작업": {
+    "color": "#17a2b8",
+    "icon": "📋",
+    "showEmoji": true,
+    "showBorder": true
+  },
+  "Tarefas": {
+    "color": "#17a2b8",
+    "icon": "📋",
+    "showEmoji": true,
+    "showBorder": true
+  },
+  "Tâches": {
+    "color": "#17a2b8",
+    "icon": "📋",
+    "showEmoji": true,
+    "showBorder": true
+  }
+}
