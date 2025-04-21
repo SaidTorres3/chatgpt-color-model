@@ -79,9 +79,9 @@ function initializePopup() {
         ${aliasEnabled ? `
         <label>${i18n("aliasToggle")}:
           <input type="text" class="aliases" data-model="${key}"
-                placeholder={i18n("modelNamePlaceholder")}
-                 value="${(cfg.names || []).join(", ")}"
-                 style="width:120px;">
+                placeholder="${chrome.i18n.getMessage("aliasInstruction")}"
+                value="${(cfg.names || []).join(", ")}"
+                style="width:300px;">
         </label>` : ""}
       `;
       container.appendChild(row);

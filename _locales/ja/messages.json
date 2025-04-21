@@ -20,5 +20,6 @@
   "removeTooltip": { "message": "削除" },
   "aliasToggle": { "message": "別名を表示" },
   "syncButton": { "message": "🔁 モデルを更新" },
-  "syncCompleted": { "message": "モデルが正常に更新されました。" }
+  "syncCompleted": { "message": "モデルが正常に更新されました。" },
+  "aliasInstruction": { "message": "例: Tareas, Tâches, タスク" }
 }

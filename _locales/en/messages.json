@@ -20,5 +20,6 @@
   "removeTooltip": { "message": "Remove" },
   "aliasToggle": { "message": "Show aliases" },
   "syncButton": { "message": "🔁 Update Models" },
-  "syncCompleted": { "message": "Models updated successfully." }
+  "syncCompleted": { "message": "Models updated successfully." },
+  "aliasInstruction": { "message": "I.e: Tareas, Tâches, タスク" }
 }

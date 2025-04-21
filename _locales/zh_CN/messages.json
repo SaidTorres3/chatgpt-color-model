@@ -20,5 +20,6 @@
   "removeTooltip": { "message": "删除" },
   "aliasToggle": { "message": "显示别名" },
   "syncButton": { "message": "🔁 更新模型" },
-  "syncCompleted": { "message": "模型更新成功。"}
+  "syncCompleted": { "message": "模型更新成功。" },
+  "aliasInstruction": { "message": "例如：Tareas,Tâches,タスク" }
 }

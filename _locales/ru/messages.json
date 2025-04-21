@@ -20,5 +20,6 @@
   "removeTooltip": { "message": "Удалить" },
   "aliasToggle": { "message": "Показать псевдонимы" },
   "syncButton": { "message": "🔁 Обновить модели" },
-  "syncCompleted": { "message": "Модели успешно обновлены." }
+  "syncCompleted": { "message": "Модели успешно обновлены." },
+  "aliasInstruction": { "message": "Напр.: Tareas, Tâches, タスク" }
 }

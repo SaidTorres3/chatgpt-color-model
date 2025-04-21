@@ -20,5 +20,6 @@
   "removeTooltip": { "message": "حذف" },
   "aliasToggle": { "message": "عرض الأسماء المستعارة" },
   "syncButton": { "message": "🔁 تحديث النماذج" },
-  "syncCompleted": { "message": "تم تحديث النماذج بنجاح." }
+  "syncCompleted": { "message": "تم تحديث النماذج بنجاح." },
+  "aliasInstruction": { "message": "مثال: Tareas, Tâches, タスク" }
 }
