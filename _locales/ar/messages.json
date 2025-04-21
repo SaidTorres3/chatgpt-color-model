@@ -1,7 +1,7 @@
 {
-  "extensionName": { "message": "مُخصص نماذج ChatGPT" },
+  "extensionName": { "message": "ChatGPT Color Model" },
   "extensionDescription": {
-    "message": "خصص الرموز التعبيرية والألوان والحدود لنماذج ChatGPT."
+    "message": "خصص الألوان والرموز التعبيرية والحدود للنماذج في ChatGPT."
   },
   "tabEditorLabel": { "message": "المحرر" },
   "tabJSONLabel": { "message": "JSON" },

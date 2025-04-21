@@ -1,7 +1,7 @@
 {
-  "extensionName": { "message": "Personalizzatore modelli ChatGPT" },
+  "extensionName": { "message": "ChatGPT Color Model" },
   "extensionDescription": {
-    "message": "Personalizza emoji, colori e bordi dei modelli ChatGPT."
+    "message": "Personalizza colori, emoji e bordi dei modelli in ChatGPT."
   },
   "tabEditorLabel": { "message": "Editor" },
   "tabJSONLabel": { "message": "JSON" },

@@ -1,7 +1,7 @@
 {
   "extensionName": { "message": "Стилизация моделей ChatGPT" },
   "extensionDescription": {
-    "message": "Настройте эмодзи, цвета и рамки для моделей ChatGPT."
+    "message": "Настройте цвета, эмодзи и границы моделей в ChatGPT."
   },
   "tabEditorLabel": { "message": "Редактор" },
   "tabJSONLabel": { "message": "JSON" },

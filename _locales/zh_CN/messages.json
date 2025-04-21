@@ -1,7 +1,7 @@
 {
   "extensionName": { "message": "ChatGPT 模型样式器" },
   "extensionDescription": {
-    "message": "自定义 ChatGPT 模型的表情符号、颜色和边框。"
+    "message": "自定义 ChatGPT 中模型的颜色、表情符号和边框。"
   },
   "tabEditorLabel": { "message": "编辑器" },
   "tabJSONLabel": { "message": "JSON" },

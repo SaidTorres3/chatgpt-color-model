@@ -1,7 +1,7 @@
 {
-  "extensionName": { "message": "ChatGPT 모델 스타일러" },
+  "extensionName": { "message": "ChatGPT Color Model" },
   "extensionDescription": {
-    "message": "ChatGPT 모델의 이모지, 색상 및 테두리를 사용자 정의합니다."
+    "message": "ChatGPT에서 모델의 색상, 이모지 및 테두리를 사용자 지정하세요."
   },
   "tabEditorLabel": { "message": "편집기" },
   "tabJSONLabel": { "message": "JSON" },

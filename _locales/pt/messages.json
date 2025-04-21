@@ -1,7 +1,7 @@
 {
   "extensionName": { "message": "Estilizador de Modelos ChatGPT" },
   "extensionDescription": {
-    "message": "Personalize emojis, cores e bordas dos modelos ChatGPT."
+    "message": "Personalize cores, emojis e bordas dos modelos no ChatGPT."
   },
   "tabEditorLabel": { "message": "Editor" },
   "tabJSONLabel": { "message": "JSON" },
