@@ -18,5 +18,7 @@
   "configImported": { "message": "Konfiguration importiert." },
   "invalidJSON": { "message": "Ungültiges JSON" },
   "removeTooltip": { "message": "Entfernen" },
-  "aliasToggle": { "message": "Aliase anzeigen" }
+  "aliasToggle": { "message": "Aliase anzeigen" },
+  "syncButton": { "message": "🔁 Modelle aktualisieren" },
+  "syncCompleted": { "message": "Modelle erfolgreich aktualisiert." }
 }

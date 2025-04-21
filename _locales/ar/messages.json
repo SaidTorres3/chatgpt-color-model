@@ -18,5 +18,7 @@
   "configImported": { "message": "تم استيراد الإعدادات." },
   "invalidJSON": { "message": "JSON غير صالح" },
   "removeTooltip": { "message": "حذف" },
-  "aliasToggle": { "message": "عرض الأسماء المستعارة"}
+  "aliasToggle": { "message": "عرض الأسماء المستعارة" },
+  "syncButton": { "message": "🔁 تحديث النماذج" },
+  "syncCompleted": { "message": "تم تحديث النماذج بنجاح." }
 }

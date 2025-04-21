@@ -14,7 +14,7 @@
     .model-row label{margin-right:8px;font-size:.9em}
     #addForm{margin:8px 0;padding:6px;border:1px dashed #aaa}
     #addForm input{margin-right:4px}
-    #saveButton{margin-top:8px;width:100%;padding:6px}
+    #saveButton, #syncButton{margin-top:8px;width:100%;padding:6px;display:block}
     #jsonArea{width:100%;height:200px;font-family:monospace}
   </style>
 </head>
@@ -32,19 +32,21 @@
       <span id="aliasToggleText"></span>
     </label>
 
-    <!-- Editor rows go here -->
+    <!-- Editor rows -->
     <div id="container"></div>
 
     <!-- Add model -->
     <form id="addForm">
       <strong id="addModelHeading"></strong><br>
-      <input id="modelNameInput"  required />
+      <input id="modelNameInput" required />
       <input type="color" id="modelColorInput" value="#000000" />
-      <input id="modelIconInput" maxlength="2" style="width:2em;" />
+      <input id="modelIconInput" maxlength="2" style="width:3em;" />
       <button type="submit" id="addButton"></button>
     </form>
 
+    <!-- Botones de acción -->
     <button id="saveButton"></button>
+    <button id="syncButton"></button>
   </div>
 
   <div id="json" class="tab-content">

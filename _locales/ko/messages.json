@@ -18,5 +18,7 @@
   "configImported": { "message": "구성이 가져와졌습니다." },
   "invalidJSON": { "message": "잘못된 JSON" },
   "removeTooltip": { "message": "제거" },
-  "aliasToggle": { "message": "별칭 표시" }
+  "aliasToggle": { "message": "별칭 표시" },
+  "syncButton": { "message": "🔁 모델 업데이트" },
+  "syncCompleted": { "message": "모델이 성공적으로 업데이트되었습니다." }
 }

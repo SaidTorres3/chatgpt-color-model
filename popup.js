@@ -13,16 +13,19 @@ function initializePopup() {
   const container = $("container");
   const jsonArea = $("jsonArea");
   const addForm = $("addForm");
+  const syncBtn = $("syncButton");
+  const saveBtn = $("saveButton");
 
-  // i18n labels
-  tabs.editor.textContent = i18n("tabEditorLabel");
-  tabs.json.textContent = i18n("tabJSONLabel");
+  // i18n labels (o texto por defecto)
+  tabs.editor.textContent = i18n("tabEditorLabel") || "Editor";
+  tabs.json.textContent = i18n("tabJSONLabel") || "JSON";
   aliasL.textContent = i18n("aliasToggle") || "Usar alias";
   $("addModelHeading").textContent = i18n("addModelHeading") || "Nuevo modelo";
   $("modelNameInput").placeholder = i18n("modelNamePlaceholder") || "Nombre";
   $("modelIconInput").placeholder = i18n("emojiLabel") || "Emoji";
   $("addButton").textContent = i18n("addButton") || "Añadir";
-  $("saveButton").textContent = i18n("saveButton") || "Guardar";
+  syncBtn.textContent = i18n("syncButton") || "Sincronizar";
+  saveBtn.textContent = i18n("saveButton") || "Guardar";
   $("copyJSON").textContent = i18n("copyJSON") || "Copiar";
   $("importJSON").textContent = i18n("importJSON") || "Importar";
 
@@ -37,7 +40,7 @@ function initializePopup() {
   tabs.editor.onclick = () => switchTab("editor");
   tabs.json.onclick = () => switchTab("json");
 
-  // Figure out which keys are “main” (i.e. not aliases)
+  // Obtiene sólo las claves “principales” (no alias)
   function getMainKeys() {
     const all = Object.keys(modelStyles);
     const aliasSet = new Set();
@@ -47,11 +50,10 @@ function initializePopup() {
         cfg.names.forEach(n => aliasSet.add(n));
       }
     });
-    const mains = all.filter(k => !aliasSet.has(k));
-    return mains;
+    return all.filter(k => !aliasSet.has(k));
   }
 
-  // Draw the editor rows
+  // Dibuja filas en el editor
   function renderEditor() {
     container.innerHTML = "";
     getMainKeys().forEach(key => {
@@ -60,24 +62,24 @@ function initializePopup() {
       row.className = "model-row";
       row.innerHTML = `
         <div>
-          <strong>${key}</strong>
+          <strong>${i18n(key)}</strong>
           <button class="remove" data-model="${key}">✖</button>
         </div>
-        <label>Color:
+        <label>${i18n("colorLabel")}:
           <input type="color" class="color" data-model="${key}" value="${cfg.color}">
         </label>
-        <label>Emoji:
+        <label>${i18n("emojiLabel")}:
           <input type="text" class="icon" data-model="${key}"
                  value="${cfg.icon}" maxlength="2" style="width:2em;">
         </label>
         <label><input type="checkbox" class="showEmoji" data-model="${key}"
-                      ${cfg.showEmoji ? "checked" : ""}/> Emoji</label>
+                      ${cfg.showEmoji ? "checked" : ""}/> ${i18n("emojiLabel")}</label>
         <label><input type="checkbox" class="showBorder" data-model="${key}"
-                      ${cfg.showBorder ? "checked" : ""}/> Borde</label>
+                      ${cfg.showBorder ? "checked" : ""}/> ${i18n("borderCheckboxLabel")}</label>
         ${aliasEnabled ? `
-        <label>Alias:
+        <label>${i18n("aliasToggle")}:
           <input type="text" class="aliases" data-model="${key}"
-                 placeholder="coma separada"
+                placeholder={i18n("modelNamePlaceholder")}
                  value="${(cfg.names || []).join(", ")}"
                  style="width:120px;">
         </label>` : ""}
@@ -86,7 +88,7 @@ function initializePopup() {
     });
   }
 
-  // Load from storage (with defaults)
+  // Carga inicial desde storage
   chrome.storage.sync.get(
     { modelStyles: defaultModelStyles, aliasEnabled: false },
     ({ modelStyles: ms, aliasEnabled: ae }) => {
@@ -97,14 +99,28 @@ function initializePopup() {
     }
   );
 
-  // Toggle alias input
+  // Toggle alias inputs
   aliasCB.onchange = () => {
     aliasEnabled = aliasCB.checked;
     renderEditor();
   };
 
-  // Save edits
-  $("saveButton").onclick = () => {
+  syncBtn.onclick = () => {
+    // Añade todos los defaults que falten
+    Object.keys(defaultModelStyles).forEach(key => {
+      if (!(key in modelStyles)) {
+        modelStyles[key] = defaultModelStyles[key];
+      }
+    });
+    // Guarda y refresca
+    chrome.storage.sync.set({ modelStyles, aliasEnabled }, () => {
+      renderEditor();
+      alert(i18n("syncCompleted") || "Sync completed.");
+    });
+  };
+
+  // Guardar cambios manuales
+  saveBtn.onclick = () => {
     getMainKeys().forEach(key => {
       const cfg = modelStyles[key];
       const row = container.querySelector(`[data-model="${key}"]`).closest(".model-row");
@@ -122,19 +138,17 @@ function initializePopup() {
       }
     });
 
-    // remove any keys that are pure aliases
+    // Elimina claves que sean alias puros
     const toDelete = Object.keys(modelStyles).filter(k => {
       const allAliases = getMainKeys().flatMap(m => modelStyles[m].names || []);
       return allAliases.includes(k);
     });
     toDelete.forEach(k => delete modelStyles[k]);
 
-    chrome.storage.sync.set({ modelStyles, aliasEnabled }, () => {
-      window.close();
-    });
+    chrome.storage.sync.set({ modelStyles, aliasEnabled }, () => window.close());
   };
 
-  // Remove a model
+  // Quitar un modelo
   container.onclick = e => {
     if (e.target.matches(".remove")) {
       delete modelStyles[e.target.dataset.model];
@@ -142,7 +156,7 @@ function initializePopup() {
     }
   };
 
-  // Add a new one
+  // Añadir nuevo modelo
   addForm.onsubmit = e => {
     e.preventDefault();
     const name = $("modelNameInput").value.trim();
@@ -157,29 +171,24 @@ function initializePopup() {
     addForm.reset();
   };
 
-  // Copy JSON
+  // Copiar JSON
   $("copyJSON").onclick = () => {
     jsonArea.select();
     document.execCommand("copy");
   };
 
-  // Import JSON manually
+  // Importar JSON manualmente
   $("importJSON").onclick = () => {
     try {
       const obj = JSON.parse(jsonArea.value);
       modelStyles = obj;
       aliasEnabled = Object.values(obj).some(c => Array.isArray(c.names));
       aliasCB.checked = aliasEnabled;
-
-      // strip out any leftover alias keys
-      const defaultAliases = Object.keys(defaultModelStyles)
+      // Limpiar viejos alias de default
+      Object.keys(defaultModelStyles)
         .filter(k => Array.isArray(defaultModelStyles[k].names))
-        .flatMap(k => defaultModelStyles[k].names);
-      defaultAliases.forEach(a => {
-        if (modelStyles[a]) {
-          delete modelStyles[a];
-        }
-      });
+        .flatMap(k => defaultModelStyles[k].names)
+        .forEach(a => { if (modelStyles[a]) delete modelStyles[a]; });
 
       chrome.storage.sync.set({ modelStyles, aliasEnabled }, () => {
         renderEditor();
@@ -194,7 +203,7 @@ function initializePopup() {
   switchTab("editor");
 }
 
-// Wait for DOM, then fetch defaults, then init
+// Arranca al cargar el DOM y tras obtener defaults
 document.addEventListener("DOMContentLoaded", () => {
   fetch(chrome.runtime.getURL('defaultModels.json'))
     .then(res => res.json())

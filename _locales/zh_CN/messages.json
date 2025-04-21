@@ -18,5 +18,7 @@
   "configImported": { "message": "配置已导入。" },
   "invalidJSON": { "message": "无效的 JSON" },
   "removeTooltip": { "message": "删除" },
-  "aliasToggle": { "message": "显示别名" }
+  "aliasToggle": { "message": "显示别名" },
+  "syncButton": { "message": "🔁 更新模型" },
+  "syncCompleted": { "message": "模型更新成功。"}
 }
