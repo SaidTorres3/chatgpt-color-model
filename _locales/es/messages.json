@@ -49,5 +49,8 @@
   },
   "removeTooltip": {
     "message": "Eliminar"
+  },
+  "aliasToggle": {
+    "message": "Mostrar alias"
   }
 }

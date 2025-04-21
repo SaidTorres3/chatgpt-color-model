@@ -17,5 +17,6 @@
   "importJSON": { "message": "📥 JSONをインポート" },
   "configImported": { "message": "設定がインポートされました。" },
   "invalidJSON": { "message": "無効なJSON" },
-  "removeTooltip": { "message": "削除" }
+  "removeTooltip": { "message": "削除" },
+  "aliasToggle": { "message": "別名を表示" }
 }

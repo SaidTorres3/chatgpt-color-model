@@ -17,5 +17,6 @@
   "importJSON": { "message": "📥 JSON आयात करें" },
   "configImported": { "message": "कॉन्फ़िगरेशन आयातित।" },
   "invalidJSON": { "message": "अमान्य JSON" },
-  "removeTooltip": { "message": "हटाएं" }
+  "removeTooltip": { "message": "हटाएं" },
+  "aliasToggle": { "message": "उपनाम दिखाएं" }
 }

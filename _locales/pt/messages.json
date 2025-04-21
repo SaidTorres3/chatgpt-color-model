@@ -17,5 +17,6 @@
   "importJSON": { "message": "📥 Importar JSON" },
   "configImported": { "message": "Configuração importada." },
   "invalidJSON": { "message": "JSON inválido" },
-  "removeTooltip": { "message": "Remover" }
+  "removeTooltip": { "message": "Remover" },
+  "aliasToggle": { "message": "Mostrar aliases" }
 }

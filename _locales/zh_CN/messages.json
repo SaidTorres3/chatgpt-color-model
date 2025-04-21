@@ -17,5 +17,6 @@
   "importJSON": { "message": "📥 导入 JSON" },
   "configImported": { "message": "配置已导入。" },
   "invalidJSON": { "message": "无效的 JSON" },
-  "removeTooltip": { "message": "删除" }
+  "removeTooltip": { "message": "删除" },
+  "aliasToggle": { "message": "显示别名" }
 }

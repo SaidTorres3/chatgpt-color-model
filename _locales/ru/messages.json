@@ -17,5 +17,6 @@
   "importJSON": { "message": "📥 Импортировать JSON" },
   "configImported": { "message": "Конфигурация импортирована." },
   "invalidJSON": { "message": "Неверный JSON" },
-  "removeTooltip": { "message": "Удалить" }
+  "removeTooltip": { "message": "Удалить" },
+  "aliasToggle": { "message": "Показать псевдонимы" }
 }

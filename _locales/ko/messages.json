@@ -17,5 +17,6 @@
   "importJSON": { "message": "📥 JSON 가져오기" },
   "configImported": { "message": "구성이 가져와졌습니다." },
   "invalidJSON": { "message": "잘못된 JSON" },
-  "removeTooltip": { "message": "제거" }
+  "removeTooltip": { "message": "제거" },
+  "aliasToggle": { "message": "별칭 표시" }
 }
