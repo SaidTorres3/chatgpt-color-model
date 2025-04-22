@@ -42,7 +42,7 @@
     "showBorder": true
   },
   "Tasks": {
-    "names": ["Tasks", "Tareas", "タスク", "Aufgaben", "任务", "작업", "Tarefas", "Tâches", "المهام", "कार्य", "Attività", "Задачи"],
+    "names": ["Tareas", "タスク", "Aufgaben", "任务", "작업", "Tarefas", "Tâches", "المهام", "कार्य", "Attività", "Задачи"],
     "color": "#17a2b8",
     "icon": "📋",
     "showEmoji": true,
