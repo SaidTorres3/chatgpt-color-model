@@ -4,6 +4,17 @@ let aliasMap = {};
 let keys = [];
 let pattern = null;
 
+/**
+ * Listen for live‐updates from the popup and re-apply immediately.
+ */
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.type === 'UPDATE_MODEL_STYLES') {
+    modelStyles = message.modelStyles;
+    updatePattern();
+    applyModelStyle();
+  }
+});
+
 /** 1) Load defaults, then init */
 async function loadDefaults() {
   try {
@@ -17,19 +28,19 @@ async function loadDefaults() {
 
 /** 2) Read stored styles, build regex, then start infinite polling */
 function init() {
-  chrome.storage.sync.get({ modelStyles: defaultModelStyles }, res => {
-    modelStyles = res.modelStyles;
+  chrome.storage.sync.get(['modelStyles'], res => {
+    // If there is nothing in storage, use defaults
+    modelStyles = res.modelStyles ?? JSON.parse(JSON.stringify(defaultModelStyles));
     updatePattern();
-    // initial style
     applyModelStyle();
-    // poll forever
-    setInterval(applyModelStyle, 500);
+    setInterval(applyModelStyle, 300);
   });
 
   chrome.storage.onChanged.addListener((changes, area) => {
     if (area === 'sync' && changes.modelStyles) {
       modelStyles = changes.modelStyles.newValue;
       updatePattern();
+      applyModelStyle();
     }
   });
 }
@@ -37,9 +48,13 @@ function init() {
 /** 3) Build alias map + regex */
 function getMainEntries() {
   const aliasSet = new Set();
-  Object.values(modelStyles).forEach(cfg => {
+  Object.entries(modelStyles).forEach(([k, cfg]) => {
     if (Array.isArray(cfg.names)) {
-      cfg.names.forEach(n => aliasSet.add(n.toLowerCase()));
+      cfg.names.forEach(n => {
+        if (n.toLowerCase() !== k.toLowerCase()) {
+          aliasSet.add(n.toLowerCase());
+        }
+      });
     }
   });
   return Object.entries(modelStyles)
@@ -53,8 +68,10 @@ function updatePattern() {
     keys.push(mainKey);
     if (Array.isArray(cfg.names)) {
       cfg.names.forEach(alias => {
-        aliasMap[alias.toLowerCase()] = mainKey;
-        keys.push(alias);
+        if (alias.toLowerCase() !== mainKey.toLowerCase()) {
+          aliasMap[alias.toLowerCase()] = mainKey;
+          keys.push(alias);
+        }
       });
     }
   });
@@ -67,11 +84,10 @@ function updatePattern() {
 function applyModelStyle() {
   if (!pattern) return;
 
-  // remove old
   document.getElementById('cm-style')?.remove();
   let css = '';
 
-  // — Default dropdown —
+  // Default dropdown
   const btnDefault = document.querySelector('[data-testid="model-switcher-dropdown-button"]');
   if (btnDefault) {
     const text = btnDefault.innerText.trim().split(' ').slice(1).join(' ').trim();
@@ -99,7 +115,7 @@ function applyModelStyle() {
     }
   }
 
-  // — Custom GPT buttons —
+  // Custom GPT buttons
   const custom = document.querySelectorAll('div.group.flex.cursor-pointer.items-center.gap-1[type="button"]');
   custom.forEach(el => {
     const text = el.textContent.trim();

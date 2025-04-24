@@ -21,5 +21,9 @@
   "aliasToggle": { "message": "別名を表示" },
   "syncButton": { "message": "🔁 モデルを更新" },
   "syncCompleted": { "message": "モデルが正常に更新されました。" },
-  "aliasInstruction": { "message": "例: Tareas, Tâches, タスク" }
+  "aliasInstruction": { "message": "例: Tareas, Tâches, タスク" },
+  "resetJSON": { "message": "🗑️ JSONをリセット" },
+  "importCompleted": { "message": "インポートが完了しました。" },
+  "resetCompleted": { "message": "デフォルト値にリセットされました。" },
+  "reportIssue": { "message": "問題を報告する" }
 }

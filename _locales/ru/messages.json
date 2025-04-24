@@ -21,5 +21,9 @@
   "aliasToggle": { "message": "Показать псевдонимы" },
   "syncButton": { "message": "🔁 Обновить модели" },
   "syncCompleted": { "message": "Модели успешно обновлены." },
-  "aliasInstruction": { "message": "Напр.: Tareas, Tâches, タスク" }
+  "aliasInstruction": { "message": "Напр.: Tareas, Tâches, タスク" },
+  "resetJSON": { "message": "🗑️ Сбросить JSON" },
+  "importCompleted": { "message": "Импорт завершён." },
+  "resetCompleted": { "message": "Сброшено до значений по умолчанию." },
+  "reportIssue": { "message": "Сообщить о проблеме" }
 }

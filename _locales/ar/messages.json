@@ -21,5 +21,9 @@
   "aliasToggle": { "message": "عرض الأسماء المستعارة" },
   "syncButton": { "message": "🔁 تحديث النماذج" },
   "syncCompleted": { "message": "تم تحديث النماذج بنجاح." },
-  "aliasInstruction": { "message": "مثال: Tareas, Tâches, タスク" }
+  "aliasInstruction": { "message": "مثال: Tareas, Tâches, タスク" },
+  "resetJSON": { "message": "🗑️ إعادة تعيين JSON" },
+  "importCompleted": { "message": "تم الاستيراد بنجاح." },
+  "resetCompleted": { "message": "تمت إعادة الإعدادات إلى الوضع الافتراضي." },
+  "reportIssue": { "message": "الإبلاغ عن مشكلة" }
 }

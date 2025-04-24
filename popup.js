@@ -2,6 +2,22 @@ let defaultModelStyles = {};
 let modelStyles = {};
 let aliasEnabled = false;
 
+/**
+ * Broadcast the new styles to the active tab immediately,
+ * bypassing storage.sync rate limits.
+ */
+function notifyContentScripts() {
+  chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+    for (const tab of tabs) {
+      chrome.tabs.sendMessage(tab.id, {
+        type: 'UPDATE_MODEL_STYLES',
+        modelStyles,
+        aliasEnabled
+      });
+    }
+  });
+}
+
 function initializePopup() {
   const $ = id => document.getElementById(id);
   const i18n = k => chrome.i18n?.getMessage(k) || k;
@@ -14,9 +30,12 @@ function initializePopup() {
   const jsonArea = $("jsonArea");
   const addForm = $("addForm");
   const syncBtn = $("syncButton");
-  const saveBtn = $("saveButton");
+  const copyBtn = $("copyJSON");
+  const importBtn = $("importJSON");
+  const resetBtn = $("resetJSON");
+  const reportBtn = $("reportButton");
 
-  // i18n labels (o texto por defecto)
+  // i18n labels
   tabs.editor.textContent = i18n("tabEditorLabel") || "Editor";
   tabs.json.textContent = i18n("tabJSONLabel") || "JSON";
   aliasL.textContent = i18n("aliasToggle") || "Usar alias";
@@ -25,9 +44,17 @@ function initializePopup() {
   $("modelIconInput").placeholder = i18n("emojiLabel") || "Emoji";
   $("addButton").textContent = i18n("addButton") || "Añadir";
   syncBtn.textContent = i18n("syncButton") || "Sincronizar";
-  saveBtn.textContent = i18n("saveButton") || "Guardar";
-  $("copyJSON").textContent = i18n("copyJSON") || "Copiar";
-  $("importJSON").textContent = i18n("importJSON") || "Importar";
+  copyBtn.textContent = i18n("copyJSON") || "Copiar";
+  importBtn.textContent = i18n("importJSON") || "Importar";
+  resetBtn.textContent = i18n("resetJSON") || "Reset JSON";
+  reportBtn.textContent = i18n("reportIssue") || "Report Issue";
+
+  // Report Issue button
+  reportBtn.onclick = () => {
+    chrome.tabs.create({
+      url: "https://github.com/SaidTorres3/chatgpt-color-model/issues"
+    });
+  };
 
   // Tab switching
   function switchTab(to) {
@@ -35,25 +62,24 @@ function initializePopup() {
       .forEach(b => b.classList.toggle("active", b.dataset.tab === to));
     document.querySelectorAll(".tab-content")
       .forEach(d => d.classList.toggle("active", d.id === to));
-    if (to === "json") jsonArea.value = JSON.stringify(modelStyles, null, 2);
+    if (to === "json") {
+      jsonArea.value = JSON.stringify(modelStyles, null, 2);
+    }
   }
   tabs.editor.onclick = () => switchTab("editor");
   tabs.json.onclick = () => switchTab("json");
 
-  // Obtiene sólo las claves “principales” (no alias)
+  // Helpers
   function getMainKeys() {
     const all = Object.keys(modelStyles);
     const aliasSet = new Set();
     all.forEach(k => {
       const cfg = modelStyles[k];
-      if (Array.isArray(cfg.names)) {
-        cfg.names.forEach(n => aliasSet.add(n));
-      }
+      if (Array.isArray(cfg.names)) cfg.names.forEach(n => aliasSet.add(n));
     });
     return all.filter(k => !aliasSet.has(k));
   }
 
-  // Dibuja filas en el editor
   function renderEditor() {
     container.innerHTML = "";
     getMainKeys().forEach(key => {
@@ -88,39 +114,16 @@ function initializePopup() {
     });
   }
 
-  // Carga inicial desde storage
-  chrome.storage.sync.get(
-    { modelStyles: defaultModelStyles, aliasEnabled: false },
-    ({ modelStyles: ms, aliasEnabled: ae }) => {
-      modelStyles = ms;
-      aliasEnabled = ae;
-      aliasCB.checked = aliasEnabled;
-      renderEditor();
-    }
-  );
-
-  // Toggle alias inputs
-  aliasCB.onchange = () => {
-    aliasEnabled = aliasCB.checked;
+  // Load from storage
+  chrome.storage.sync.get(['modelStyles', 'aliasEnabled'], res => {
+    modelStyles = res.modelStyles ?? JSON.parse(JSON.stringify(defaultModelStyles));
+    aliasEnabled = res.aliasEnabled ?? false;
+    aliasCB.checked = aliasEnabled;
     renderEditor();
-  };
+  });
 
-  syncBtn.onclick = () => {
-    // Añade todos los defaults que falten
-    Object.keys(defaultModelStyles).forEach(key => {
-      if (!(key in modelStyles)) {
-        modelStyles[key] = defaultModelStyles[key];
-      }
-    });
-    // Guarda y refresca
-    chrome.storage.sync.set({ modelStyles, aliasEnabled }, () => {
-      renderEditor();
-      alert(i18n("syncCompleted") || "Sync completed.");
-    });
-  };
-
-  // Guardar cambios manuales
-  saveBtn.onclick = () => {
+  // Auto-save + live-update
+  function updateAndSave() {
     getMainKeys().forEach(key => {
       const cfg = modelStyles[key];
       const row = container.querySelector(`[data-model="${key}"]`).closest(".model-row");
@@ -130,33 +133,44 @@ function initializePopup() {
       cfg.showBorder = row.querySelector(".showBorder").checked;
       if (aliasEnabled) {
         const aliases = row.querySelector(".aliases").value
-          .split(",").map(s => s.trim()).filter(Boolean);
-        if (aliases.length) cfg.names = aliases;
+          .split(",").map(s => s.trim())
+          .filter(a => a && a.toLowerCase() !== key.toLowerCase());
+        const unique = [...new Set(aliases)];
+        if (unique.length) cfg.names = unique;
         else delete cfg.names;
       } else {
         delete cfg.names;
       }
     });
-
-    // Elimina claves que sean alias puros
+    // Remove orphan aliases
     const toDelete = Object.keys(modelStyles).filter(k => {
       const allAliases = getMainKeys().flatMap(m => modelStyles[m].names || []);
       return allAliases.includes(k);
     });
     toDelete.forEach(k => delete modelStyles[k]);
 
-    chrome.storage.sync.set({ modelStyles, aliasEnabled }, () => window.close());
+    chrome.storage.sync.set({ modelStyles, aliasEnabled }, notifyContentScripts);
+  }
+  container.addEventListener("input", updateAndSave);
+  container.addEventListener("change", updateAndSave);
+
+  // Alias toggle (manual only)
+  aliasCB.onchange = () => {
+    aliasEnabled = aliasCB.checked;
+    renderEditor();
+    chrome.storage.sync.set({ modelStyles, aliasEnabled }, notifyContentScripts);
   };
 
-  // Quitar un modelo
+  // Delete model
   container.onclick = e => {
     if (e.target.matches(".remove")) {
       delete modelStyles[e.target.dataset.model];
       renderEditor();
+      chrome.storage.sync.set({ modelStyles, aliasEnabled }, notifyContentScripts);
     }
   };
 
-  // Añadir nuevo modelo
+  // Add model
   addForm.onsubmit = e => {
     e.preventDefault();
     const name = $("modelNameInput").value.trim();
@@ -169,41 +183,61 @@ function initializePopup() {
     };
     renderEditor();
     addForm.reset();
+    chrome.storage.sync.set({ modelStyles, aliasEnabled }, notifyContentScripts);
   };
 
-  // Copiar JSON
-  $("copyJSON").onclick = () => {
+  // Sync with defaults
+  syncBtn.onclick = () => {
+    Object.keys(defaultModelStyles).forEach(key => {
+      if (!(key in modelStyles)) {
+        modelStyles[key] = defaultModelStyles[key];
+      }
+    });
+    chrome.storage.sync.set({ modelStyles, aliasEnabled }, () => {
+      renderEditor();
+      alert(i18n("syncCompleted") || "Models updated successfully.");
+      notifyContentScripts();
+    });
+  };
+
+  // Copy JSON
+  copyBtn.onclick = () => {
     jsonArea.select();
     document.execCommand("copy");
   };
 
-  // Importar JSON manualmente
-  $("importJSON").onclick = () => {
+  // Import JSON
+  importBtn.onclick = () => {
     try {
       const obj = JSON.parse(jsonArea.value);
       modelStyles = obj;
-      aliasEnabled = Object.values(obj).some(c => Array.isArray(c.names));
-      aliasCB.checked = aliasEnabled;
-      // Limpiar viejos alias de default
-      Object.keys(defaultModelStyles)
-        .filter(k => Array.isArray(defaultModelStyles[k].names))
-        .flatMap(k => defaultModelStyles[k].names)
-        .forEach(a => { if (modelStyles[a]) delete modelStyles[a]; });
-
       chrome.storage.sync.set({ modelStyles, aliasEnabled }, () => {
         renderEditor();
         switchTab("editor");
+        alert(i18n("importCompleted") || "Import completed.");
+        notifyContentScripts();
       });
-    } catch (err) {
-      console.error('popup.js: invalid JSON', err);
-      alert("JSON inválido");
+    } catch {
+      alert(i18n("invalidJSON") || "JSON inválido");
     }
+  };
+
+  // Reset JSON
+  resetBtn.onclick = () => {
+    modelStyles = JSON.parse(JSON.stringify(defaultModelStyles));
+    chrome.storage.sync.set({ modelStyles, aliasEnabled }, () => {
+      jsonArea.value = JSON.stringify(modelStyles, null, 2);
+      renderEditor();
+      switchTab("json");
+      alert(i18n("resetCompleted") || "Reset to default values.");
+      notifyContentScripts();
+    });
   };
 
   switchTab("editor");
 }
 
-// Arranca al cargar el DOM y tras obtener defaults
+// Bootstrap
 document.addEventListener("DOMContentLoaded", () => {
   fetch(chrome.runtime.getURL('defaultModels.json'))
     .then(res => res.json())

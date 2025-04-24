@@ -21,5 +21,9 @@
   "aliasToggle": { "message": "별칭 표시" },
   "syncButton": { "message": "🔁 모델 업데이트" },
   "syncCompleted": { "message": "모델이 성공적으로 업데이트되었습니다." },
-  "aliasInstruction": { "message": "예: Tareas, Tâches, タスク" }
+  "aliasInstruction": { "message": "예: Tareas, Tâches, タスク" },
+  "resetJSON": { "message": "🗑️ JSON 재설정" },
+  "importCompleted": { "message": "가져오기 완료됨." },
+  "resetCompleted": { "message": "기본값으로 재설정되었습니다." },
+  "reportIssue": { "message": "문제 신고" }
 }

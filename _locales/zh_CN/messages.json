@@ -21,5 +21,9 @@
   "aliasToggle": { "message": "显示别名" },
   "syncButton": { "message": "🔁 更新模型" },
   "syncCompleted": { "message": "模型更新成功。" },
-  "aliasInstruction": { "message": "例如：Tareas,Tâches,タスク" }
+  "aliasInstruction": { "message": "例如：Tareas,Tâches,タスク" },
+  "resetJSON": { "message": "🗑️ 重置 JSON" },
+  "importCompleted": { "message": "导入完成。" },
+  "resetCompleted": { "message": "已重置为默认值。" },
+  "reportIssue": { "message": "报告问题" }
 }

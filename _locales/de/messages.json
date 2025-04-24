@@ -21,5 +21,9 @@
   "aliasToggle": { "message": "Aliase anzeigen" },
   "syncButton": { "message": "🔁 Modelle aktualisieren" },
   "syncCompleted": { "message": "Modelle erfolgreich aktualisiert." },
-  "aliasInstruction": { "message": "Z. B.: Tareas, Tâches, タスク" }
+  "aliasInstruction": { "message": "Z. B.: Tareas, Tâches, タスク" },
+  "resetJSON": { "message": "🗑️ JSON zurücksetzen" },
+  "importCompleted": { "message": "Import abgeschlossen." },
+  "resetCompleted": { "message": "Auf Standardwerte zurückgesetzt." },
+  "reportIssue": { "message": "Problem melden" }
 }
