@@ -23,6 +23,24 @@
     "showBorder": true,
     "showEmoji": true
   },
+  "5": {
+    "color": "#a9cefe",
+    "icon": "↔️",
+    "showBorder": true,
+    "showEmoji": true
+  },
+  "5 Pro": {
+    "color": "#a142ff",
+    "icon": "🎓",
+    "showBorder": true,
+    "showEmoji": true
+  },
+  "5 Thinking": {
+    "color": "#fe8686",
+    "icon": "🧠",
+    "showBorder": true,
+    "showEmoji": true
+  },
   "o3": {
     "color": "#20c997",
     "icon": "💎",
