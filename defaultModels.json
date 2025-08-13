@@ -29,6 +29,12 @@
     "showBorder": true,
     "showEmoji": true
   },
+  "5 Fast": {
+    "color": "#ffae00",
+    "icon": "⚡",
+    "showBorder": true,
+    "showEmoji": true
+  },
   "5 Pro": {
     "color": "#a142ff",
     "icon": "🎓",
@@ -38,6 +44,12 @@
   "5 Thinking": {
     "color": "#fe8686",
     "icon": "🧠",
+    "showBorder": true,
+    "showEmoji": true
+  },
+  "5 Thinking mini": {
+    "color": "#a9fef8",
+    "icon": "💡",
     "showBorder": true,
     "showEmoji": true
   },
