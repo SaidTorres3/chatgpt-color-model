@@ -29,9 +29,10 @@
     "showBorder": true,
     "showEmoji": true
   },
-  "5 Fast": {
+  "5 Instant": {
     "color": "#ffae00",
     "icon": "⚡",
+    "names": ["5 Fast"],
     "showBorder": true,
     "showEmoji": true
   },
