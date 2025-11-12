@@ -54,6 +54,25 @@
     "showBorder": true,
     "showEmoji": true
   },
+  "5.1" : {
+    "color": "#60a3faff",
+    "icon": "↔️",
+    "showBorder": true,
+    "showEmoji": true
+  },
+  "5.1 Instant": {
+    "color": "#ffd900ff",
+    "icon": "⚡",
+    "names": ["5.1 Fast"],
+    "showBorder": true,
+    "showEmoji": true
+  },
+  "5.1 Thinking": {
+    "color": "#e57dfaff",
+    "icon": "🧠",
+    "showBorder": true,
+    "showEmoji": true
+  },
   "o3": {
     "color": "#20c997",
     "icon": "💎",
