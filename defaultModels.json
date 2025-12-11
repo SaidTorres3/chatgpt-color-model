@@ -36,7 +36,7 @@
     "showBorder": true,
     "showEmoji": true
   },
-  "5.1" : {
+  "5.1": {
     "color": "#60a3fa",
     "icon": "↔️",
     "showBorder": true,
@@ -52,6 +52,37 @@
   "5.1 Thinking": {
     "color": "#e57dfa",
     "icon": "🧠",
+    "showBorder": true,
+    "showEmoji": true
+  },
+  "5.1 Pro": {
+    "color": "#e57dfa",
+    "icon": "🎓",
+    "showBorder": true,
+    "showEmoji": true
+  },
+  "5.2": {
+    "color": "#a9cefe",
+    "icon": "↔️",
+    "showBorder": true,
+    "showEmoji": true
+  },
+  "5.2 Instant": {
+    "color": "#ffae00",
+    "icon": "⚡",
+    "names": ["5 Fast"],
+    "showBorder": true,
+    "showEmoji": true
+  },
+  "5.2 Thinking": {
+    "color": "#fe8686",
+    "icon": "🧠",
+    "showBorder": true,
+    "showEmoji": true
+  },
+  "5.2 Pro": {
+    "color": "#a142ff",
+    "icon": "🎓",
     "showBorder": true,
     "showEmoji": true
   }
