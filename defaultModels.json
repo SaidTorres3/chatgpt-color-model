@@ -85,5 +85,17 @@
     "icon": "🎓",
     "showBorder": true,
     "showEmoji": true
+  },
+  "Auto": {
+    "color": "#a9cefe",
+    "icon": "↔️",
+    "showBorder": true,
+    "showEmoji": true
+  },
+  "5.3 Instant": {
+    "color": "#fe8686",
+    "icon": "⚡",
+    "showBorder": true,
+    "showEmoji": true
   }
 }
