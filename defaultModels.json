@@ -93,8 +93,14 @@
     "showEmoji": true
   },
   "5.3 Instant": {
-    "color": "#fe8686",
+    "color": "#ff9500",
     "icon": "⚡",
+    "showBorder": true,
+    "showEmoji": true
+  },
+  "5.4 Thinking": {
+    "color": "#b870ff",
+    "icon": "🧠",
     "showBorder": true,
     "showEmoji": true
   }
